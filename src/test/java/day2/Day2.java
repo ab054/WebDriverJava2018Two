@@ -6,10 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -40,9 +42,36 @@ public class Day2 {
 
     @Test
     public void testCheckboxes() {
+        driver.get("https://the-internet.herokuapp.com/checkboxes");
 
+        By checkbox1 = By.cssSelector("#checkboxes > input:nth-child(1)");
 
+        waitFor(checkbox1, 3);
 
+        System.out.println(getAttribute(checkbox1, "checked"));
+
+        click(checkbox1);
+
+        Assert.assertNotNull(getAttribute(checkbox1, "checked"));
+
+        Assert.assertTrue(isSelected(checkbox1));
+
+        List<WebElement> checkBoxes = driver.findElements(By.cssSelector("input[type=\"Checkbox\"]"));
+
+        WebElement checkBox1 = checkBoxes.get(0);
+        WebElement checkBox2 = checkBoxes.get(1);
+    }
+
+    private boolean isSelected(By checkbox) {
+       return driver.findElement(checkbox).isSelected();
+    }
+
+    public String getAttribute(By element, String attribute) {
+        return driver.findElement(element).getAttribute(attribute);
+    }
+
+    private void click(By element) {
+        driver.findElement(element).click();
     }
 
     @AfterTest
