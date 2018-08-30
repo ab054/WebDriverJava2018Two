@@ -27,10 +27,10 @@ public class Day2 {
 
     @Test
     public void testGoogleSearch() {
-        //create object of By class using cssSelector
+        //create an object of By class using cssSelector
         By searchInputByCss = By.cssSelector("#lst-ib");
 
-        //string for search in Google
+        //string which will be used for search in Google
         String searchString = "Portnov";
 
         //url
@@ -45,12 +45,12 @@ public class Day2 {
         //sleep for 2 seconds
         sleepFor(2);
 
-        //type into search our string
+        //type value of searchString into the search input
         sendKeysTo(searchInputByCss, searchString);
     }
 
     private void sendKeysTo(By element, String charSequence){
-        //create webElement object by using findElement() which receives element
+        //create webElement object by using findElement() which receives 'element'
         WebElement webElement = driver.findElement(element);
 
         //type charSequence
@@ -61,7 +61,7 @@ public class Day2 {
     }
 
     private void waitFor(By element){
-        //create object wait with field driver and 10 seconds of timeout
+        //create object 'wait' with field 'driver' and 10 seconds of timeout
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
         //wait until element will presented on the page
@@ -76,7 +76,6 @@ public class Day2 {
     }
 
     private void sleepFor(int i) {
-
         //try catch block Java
         // https://docs.oracle.com/javase/tutorial/essential/exceptions/catch.html
         try {
