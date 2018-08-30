@@ -18,16 +18,16 @@ public class Day2 {
 
     @BeforeTest
     public void beforeTest(){
-        //setting path to gecko driver
+        //set path to gecko driver
         System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\src\\test\\resources\\geckodriver.exe");
 
-        //creating instance of Firefox
+        //create instance of Firefox
         driver = new FirefoxDriver();
     }
 
     @Test
     public void testGoogleSearch() {
-        //creating object of By class using cssSelector
+        //create object of By class using cssSelector
         By searchInputByCss = By.cssSelector("#lst-ib");
 
         //string for search in Google
