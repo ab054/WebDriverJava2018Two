@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -20,7 +21,6 @@ public class Day3 {
         By link = By.linkText("Click Here");
         String textToBeChecked = "New Window";
 
-
         setupBrowser();
         navigateToURL(url);
         clickOnLink(link);
@@ -35,11 +35,16 @@ public class Day3 {
     }
 
     private void printOutAllTitles() {
+        String currentWindowHandle = "";
+        String currentWindowTitle = "";
+
         for(String eachWindowHandle : driver.getWindowHandles()){
-            String currentWindowHandle = eachWindowHandle;
+            currentWindowHandle = eachWindowHandle;
             driver.switchTo().window(currentWindowHandle);
-            String windowTitle = driver.getTitle();
-            System.out.println(windowTitle);
+            currentWindowTitle = driver.getTitle();
+            System.out.println(currentWindowTitle);
+
+            //System.out.println(driver.switchTo().window(eachWindowHandle).getTitle());
         }
     }
 
@@ -60,5 +65,10 @@ public class Day3 {
     private void setupBrowser() {
         System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\src\\test\\resources\\geckodriver.exe");
         driver = new FirefoxDriver();
+    }
+
+    @AfterTest
+    private void afterTest(){
+        driver.quit();
     }
 }
