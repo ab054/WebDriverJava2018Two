@@ -75,7 +75,7 @@ public class Day2 {
         driver.close();
     }
 
-    private void sleepFor(int i) {
+    public static void sleepFor(int i) {
         //try catch block Java
         // https://docs.oracle.com/javase/tutorial/essential/exceptions/catch.html
         try {
