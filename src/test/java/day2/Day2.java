@@ -29,7 +29,7 @@ public class Day2 {
         sleepFor(5);
     }
 
-    private void sleepFor(int i) {
+    public static void sleepFor(int i) {
         try {
             Thread.sleep(i * 1000);
         } catch (InterruptedException e) {
