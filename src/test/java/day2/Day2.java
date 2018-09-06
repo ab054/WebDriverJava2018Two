@@ -31,7 +31,7 @@ public class Day2 {
         By searchInputByCss = By.cssSelector("#lst-ib");
 
         //string which will be used for search in Google
-        String searchString = "Portnov";
+        String searchString = "Facebook";
 
         //url
         String googleURL = "http://google.com";
@@ -60,7 +60,7 @@ public class Day2 {
         webElement.submit();
     }
 
-    private void waitFor(By element){
+    public void waitFor(By element){
         //create object 'wait' with field 'driver' and 10 seconds of timeout
         WebDriverWait wait = new WebDriverWait(driver, 10);
 

@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.Set;
-
-import static day2.Day2.sleepFor;
 
 public class Day3 {
 
@@ -29,6 +29,21 @@ public class Day3 {
         assertThatTextIsPresented(expectedText);
         printOutAllTheTitles();
         closeLastOpenedWindow();
+    }
+
+    @Test
+    public void testCheckboxes() {
+        String url = "http://the-internet.herokuapp.com/checkboxes";
+        By checkbox1 = By.cssSelector("#checkboxes > input[type=\"checkbox\"]:nth-child(1)");
+
+        driver.get(url);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(checkbox1));
+        driver.findElement(checkbox1).click();
+        String isChecked = driver.findElement(checkbox1).getAttribute("checked");
+        Assert.assertNotNull(isChecked);
+        boolean isSelected =  driver.findElement(checkbox1).isSelected();
+        Assert.assertTrue(isSelected);
     }
 
     private void closeLastOpenedWindow() {
@@ -62,7 +77,7 @@ public class Day3 {
     }
 
     private void navigateToTheURL(String url) {
-        driver.get(url);
+
     }
 
     @BeforeTest
