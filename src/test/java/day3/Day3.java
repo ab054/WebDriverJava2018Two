@@ -33,6 +33,8 @@ public class Day3 {
 
     @Test
     public void testCheckboxes() {
+        //TODO break down into sub steps/methods
+
         String url = "http://the-internet.herokuapp.com/checkboxes";
         By checkbox1 = By.cssSelector("#checkboxes > input[type=\"checkbox\"]:nth-child(1)");
 
