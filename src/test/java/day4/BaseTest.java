@@ -6,25 +6,32 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+
 
 import java.util.Set;
 
 public class BaseTest {
 
-    WebDriver driver;
+    public WebDriver driver;
 
-    @BeforeTest
-    public void openBrowser() {
+    @BeforeClass
+    public void setup(){
         System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\src\\test\\resources\\geckodriver.exe");
+    }
+
+    @BeforeMethod
+    public void openBrowser() {
         driver = new FirefoxDriver();
     }
 
-    @AfterTest
-    public void afterTest(){
+    @AfterMethod
+    public void quitBrowser(){
         driver.quit();
     }
 
@@ -85,6 +92,26 @@ public class BaseTest {
 
     public void closeLastOpenedWindow() {
         driver.close();
+    }
+
+    public void sendKeysTo(By element, String charSequence){
+        //create webElement object by using findElement() which receives 'element'
+        WebElement webElement = driver.findElement(element);
+
+        //type charSequence
+        webElement.sendKeys(charSequence);
+    }
+
+    public void waitFor(By element){
+        //create object 'wait' with field 'driver' and 10 seconds of timeout
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        //wait until element will presented on the page
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(element));
+    }
+
+    public boolean isVisible(By logoutButton) {
+        return driver.findElement(logoutButton).isDisplayed();
     }
 
 }
