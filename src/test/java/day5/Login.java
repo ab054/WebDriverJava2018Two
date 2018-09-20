@@ -12,7 +12,7 @@ public class Login extends BaseTest {
     public Object[][] dataProvider(){
         return new Object[][]{
                 {"Rest_005", "12345678", "Rest_005@gmail.com"},
-                {"Rest_005", "12345646", "Rest_005@gmail.com"},
+                {"Rest_005", "dfghdfg", "Rest_00dg5@gmail.com"},
         };
     }
 
@@ -21,6 +21,7 @@ public class Login extends BaseTest {
         String url = "http://52.9.182.211:3001/v1/log-in";
 
         navigateToTheURL(url);
+        waitFor(LoginPage.submitButton);
         enterCredentials(restaurantID, password, email);
         clickSubmit();
 

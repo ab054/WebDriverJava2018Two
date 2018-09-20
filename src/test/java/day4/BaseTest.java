@@ -31,7 +31,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void openBrowser() {
-        driver = new InternetExplorerDriver();
+        driver = new FirefoxDriver();
     }
 
     @AfterMethod
