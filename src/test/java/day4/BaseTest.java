@@ -4,8 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -20,7 +23,9 @@ public class BaseTest {
     @BeforeTest
     public void openBrowser() {
         System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\src\\test\\resources\\geckodriver.exe");
-        driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\test\\resources\\chromedriver.exe");
+        System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\src\\test\\resources\\MicrosoftWebDriver.exe");
+        driver = new InternetExplorerDriver();
     }
 
     @AfterTest
@@ -83,8 +88,24 @@ public class BaseTest {
         }
     }
 
+    public void waitFor(By element){
+        //create object 'wait' with field 'driver' and 10 seconds of timeout
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        //wait until element will presented on the page
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(element));
+    }
+
     public void closeLastOpenedWindow() {
         driver.close();
+    }
+
+    public void sendKeysTo(By element, String keysToSend) {
+        driver.findElement(element).sendKeys(keysToSend);
+    }
+
+    public boolean isVisible(By element) {
+        return driver.findElement(element).isDisplayed();
     }
 
 }
